@@ -8,5 +8,5 @@ Written in C++ with either randomized start or a standard game start. compile fo
 
 Running the game with: ```./life --random```, the console looks like so:
 
-<img src="https://media.giphy.com/media/HsUKwZe6Kr4Zd0JgC6/giphy.gif" alt="Game of Life" width="800" height="450" />
+<img src="https://media.giphy.com/media/HsUKwZe6Kr4Zd0JgC6/giphy.gif" alt="Game of Life" width="600" height="350" />
 
