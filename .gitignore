@@ -1,2 +1,5 @@
 life
 .DS_Store
+.gitignore
+life.html
+

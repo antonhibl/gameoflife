@@ -8,7 +8,7 @@
 #define ON 1
 #define OFF 0
 
-const int x_N = 40;
+const int x_N = 65;
 const int y_N = 25;
 
 int getRandBool() {
