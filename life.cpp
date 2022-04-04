@@ -185,13 +185,41 @@ int main(int argc, char *argv[]) {
 		draw_corona(gameboard, 9, 9);
 	}
 
+	// test board for ending game later
+	int testboard[y_N][x_N];
+	blank_grid(testboard);
+
 	// enter game loop
 	bool gameloop = true;
+	// iteration counter
+	int iterations = 0;
 
 	while(gameloop) {
 		display_game(gameboard);
 		update(gameboard);
-		sleep_until(system_clock::now() + seconds(1));
+		iterations += 1;
+		sleep_until(system_clock::now() + nanoseconds(100000000));
+		int change_tester = 0;
+	
+		// loop to determine if board changed	
+		for(int i = 0;i < y_N;i++) {
+			for(int j = 0;j < x_N;j++) {
+				if(testboard[i][j]==gameboard[i][j]) {
+					change_tester += 1;
+				}
+			}
+		}
+		if(change_tester == (y_N*x_N)) {
+			printf("Lasted for %d generations", iterations);
+			gameloop = false;
+		}
+
+		// loop to set testboard
+		for(int i = 0;i < y_N;i++) {
+			for(int j = 0;j < x_N;j++) {
+				testboard[i][j] = gameboard[i][j];
+			}
+		}
 	}
 
 	return 0;
