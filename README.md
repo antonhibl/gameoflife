@@ -8,4 +8,5 @@ Written in C++ with either randomized start or a standard game start. compile fo
 
 Running the game with: ```./life --random```, the console looks like so:
 
-<iframe src="https://giphy.com/embed/HsUKwZe6Kr4Zd0JgC6" width="480" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/HsUKwZe6Kr4Zd0JgC6">via GIPHY</a></p>
+![Game of Life](https://media.giphy.com/media/HsUKwZe6Kr4Zd0JgC6/giphy.gif)
+
