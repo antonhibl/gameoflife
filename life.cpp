@@ -116,6 +116,37 @@ void display_game(int gameboard[y_N][x_N]) {
 	printf("\n================================================\n");
 }
 
+void draw_corona(int gameboard[y_N][x_N], int row, int col) {
+	gameboard[row][col+6] = 1;
+	gameboard[row+1][col+5] = 1;
+	gameboard[row+2][col+5] = 1;
+	gameboard[row+1][col+7] = 1;
+	gameboard[row+2][col+7] = 1;
+	gameboard[row+3][col+6] = 1;
+	gameboard[row+4][col+4] = 1;
+	gameboard[row+4][col+8] = 1;
+	gameboard[row+5][col+1] = 1;
+	gameboard[row+5][col+2] = 1;
+	gameboard[row+6][col] = 1;
+	gameboard[row+6][col+3] = 1;
+	gameboard[row+7][col+1] = 1;
+	gameboard[row+7][col+2] = 1;
+	gameboard[row+8][col+4] = 1;
+	gameboard[row+9][col+6] = 1;
+	gameboard[row+10][col+5] = 1;
+	gameboard[row+11][col+5] = 1;
+	gameboard[row+12][col+6] = 1;
+	gameboard[row+10][col+7] = 1;
+	gameboard[row+11][col+7] = 1;
+	gameboard[row+8][col+8] = 1;
+	gameboard[row+6][col+9] = 1;
+	gameboard[row+5][col+10] = 1;
+	gameboard[row+5][col+11] = 1;
+	gameboard[row+6][col+12] = 1;
+	gameboard[row+7][col+10] = 1;
+	gameboard[row+7][col+11] = 1;
+}
+
 void draw_glider(int gameboard[y_N][x_N], int row, int col) {
 	gameboard[row][col+1] = 1;
 	gameboard[row+1][col+2] = 1;
@@ -129,9 +160,6 @@ int main(int argc, char *argv[]) {
     using namespace std::chrono; // nanoseconds, system_clock, seconds
 	using namespace std;
 
-	int steps = 0;
-
-
 	// create board
 	int gameboard[y_N][x_N];
 	// set random seed
@@ -139,40 +167,32 @@ int main(int argc, char *argv[]) {
 	// fill board
 	string rand_choice = "--random";
 
-	if(argc == 3) {
-		string rand_inp = string(argv[2]);
+	if(argc == 2) {
+		string rand_inp = string(argv[1]);
 		if(rand_inp.compare(rand_choice)==0) {
 			random_grid(gameboard);
 		}
-	} else if(argc < 3) {
+	} else if(argc < 2) {
+		// clear board
 		blank_grid(gameboard);
-	}
+		
+		// standard gliders
+		draw_glider(gameboard, rand()%y_N, rand()%x_N);
+		draw_glider(gameboard, rand()%y_N, rand()%x_N);
+		draw_glider(gameboard, rand()%y_N, rand()%x_N);
 
-	/*
-	draw_glider(gameboard, 3, 3);
-	draw_glider(gameboard, 7, 16);
-	draw_glider(gameboard, 12, 9);
-	*/
+		// Corona entity
+		draw_corona(gameboard, 9, 9);
+	}
 
 	// enter game loop
 	bool gameloop = true;
 
-	if(argc >= 2) {
-		int steps = strtol(argv[1], NULL, 10);
-		if(steps > 0) {
-			for(int c = 0;c<steps;c++) {
-				display_game(gameboard);
-				update(gameboard);
-				sleep_until(system_clock::now() + seconds(1));
-			}
-		}
-	}	
-	else {
-		while(gameloop) {
-			display_game(gameboard);
-			update(gameboard);
-			sleep_until(system_clock::now() + seconds(1));
-		}
+	while(gameloop) {
+		display_game(gameboard);
+		update(gameboard);
+		sleep_until(system_clock::now() + seconds(1));
 	}
+
 	return 0;
 }
